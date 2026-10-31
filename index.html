@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="ru" data-lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diktovshchik Pet — голосовая диктовка с питомцем на рабочем столе</title>
+  <meta name="description" content="Бесплатная локальная диктовка для Windows и macOS: зажми клавишу, говори — текст вставится в любое приложение. Без облака. А на рабочем столе живёт питомец, который всё записывает." />
+  <meta property="og:title" content="Diktovshchik Pet — диктовка голосом + питомец на рабочем столе" />
+  <meta property="og:description" content="100 % локально, без облака и аккаунтов. Windows и macOS. 20 питомцев, помидор, уровни." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#2bb3a8" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/pets.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    // theme + language before first paint (no flash)
+    (function () {
+      var d = document.documentElement;
+      try {
+        var t = localStorage.getItem('theme');
+        var l = localStorage.getItem('lang');
+        if (t) d.dataset.theme = t;
+        if (!l && !/^(ru|uk|be|kk)/i.test(navigator.language || '')) l = 'en';
+        if (l) { d.dataset.lang = l; d.lang = l; }
+      } catch (e) {}
+    })();
+  </script>
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">
+    <span lang="ru">К содержимому</span><span lang="en">Skip to content</span>
+  </a>
+
+  <header class="top">
+    <a class="brand" href="#">
+      <span class="brand-pet" id="brand-pet" aria-hidden="true"></span>
+      <span>Diktovshchik&nbsp;Pet</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#features"><span lang="ru">Возможности</span><span lang="en">Features</span></a>
+      <a href="#pets"><span lang="ru">Питомцы</span><span lang="en">Pets</span></a>
+      <a href="#how"><span lang="ru">Как устроено</span><span lang="en">How it works</span></a>
+      <a href="#team"><span lang="ru">Заказать разработку</span><span lang="en">Hire us</span></a>
+    </nav>
+    <div class="top-tools">
+      <button class="chip-btn" id="lang-btn" type="button" aria-label="Language">
+        <span lang="ru">EN</span><span lang="en">RU</span>
+      </button>
+      <button class="chip-btn" id="theme-btn" type="button" aria-label="Theme">◐</button>
+      <a class="btn btn-small" href="#download"><span lang="ru">Скачать</span><span lang="en">Download</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">
+          <span class="dot-live"></span>
+          <span lang="ru">Бесплатно · Windows и macOS · <span class="ver">v0.4</span></span>
+          <span lang="en">Free · Windows &amp; macOS · <span class="ver">v0.4</span></span>
+        </p>
+        <h1>
+          <span lang="ru">Говори — <em>питомец</em> запишет.</span>
+          <span lang="en">You talk. <em>Your pet</em> takes notes.</span>
+        </h1>
+        <p class="lead">
+          <span lang="ru">Зажми клавишу, скажи фразу, отпусти — текст появится там, где стоит курсор: в мессенджере, почте, коде, документе. Распознавание идёт <b>прямо на твоём компьютере</b>: без облака, без аккаунта, без подписки. А рядом живёт маленький питомец — он слушает, пишет в блокнот и бросает записку прямо в поле ввода.</span>
+          <span lang="en">Hold a key, say a sentence, release — the text lands wherever your caret is: chat, email, code, docs. Speech is recognized <b>right on your computer</b>: no cloud, no account, no subscription. And a tiny pet lives on your desktop — it listens, scribbles in its notebook and throws the note straight into the text field.</span>
+        </p>
+        <div class="cta" id="download">
+          <a class="btn btn-primary dl" data-os="win" href="https://github.com/Pavlovskyi-Andrii/dikto-pet/releases/latest">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5 10.5 4.4v7H3zM11.5 4.3 21 3v8.4h-9.5zM3 12.6h7.5v7L3 18.5zM11.5 12.6H21V21l-9.5-1.3z" fill="currentColor"/></svg>
+            <span><span lang="ru">Скачать для Windows</span><span lang="en">Download for Windows</span><small class="dl-meta" data-meta="win">Windows 10/11 · x64</small></span>
+          </a>
+          <a class="btn btn-ghost dl" data-os="mac" href="https://github.com/Pavlovskyi-Andrii/dikto-pet/releases/latest">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.8-1.7 0-3.3 1-4.1 2.5-1.8 3.1-.5 7.6 1.3 10.1.8 1.2 1.8 2.6 3.1 2.5 1.3 0 1.7-.8 3.3-.8s2 .8 3.3.8c1.4 0 2.2-1.2 3-2.4 1-1.4 1.4-2.7 1.4-2.8 0 0-2.7-1-2.7-4.3ZM13.9 5.2c.7-.8 1.2-2 1-3.2-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3.1 1.1.1 2.2-.6 2.9-1.4Z" fill="currentColor"/></svg>
+            <span><span lang="ru">Скачать для Mac</span><span lang="en">Download for Mac</span><small class="dl-meta" data-meta="mac">macOS 12+ · Apple Silicon</small></span>
+          </a>
+        </div>
+        <ul class="badges">
+          <li><span lang="ru">🔒 Голос не покидает компьютер</span><span lang="en">🔒 Your voice never leaves the machine</span></li>
+          <li><span lang="ru">⚡ ~2–3 с на фразу</span><span lang="en">⚡ ~2–3 s per phrase</span></li>
+          <li><span lang="ru">🌍 99 языков</span><span lang="en">🌍 99 languages</span></li>
+        </ul>
+        <p class="tiny" id="release-line">
+          <a href="https://github.com/Pavlovskyi-Andrii/dikto-pet/releases"><span lang="ru">Все версии и заметки к релизам →</span><span lang="en">All versions &amp; release notes →</span></a>
+        </p>
+      </div>
+
+      <!-- live demo: an editor window + the pet -->
+      <div class="stage" id="stage" aria-label="Demo">
+        <div class="window">
+          <div class="win-bar">
+            <i></i><i></i><i></i>
+            <span class="win-title"><span lang="ru">Сообщение — Чат</span><span lang="en">Message — Chat</span></span>
+          </div>
+          <div class="win-body">
+            <div class="msg-to"><span lang="ru">Кому: <b>Марина</b></span><span lang="en">To: <b>Marina</b></span></div>
+            <p class="doc" id="doc"><span id="doc-text"></span><span class="caret" id="caret"></span></p>
+          </div>
+        </div>
+        <div class="stage-pet" id="stage-pet"></div>
+        <div class="bubble-say" id="say" hidden></div>
+        <div class="food-pop" id="food-pop" hidden></div>
+        <div class="flyer" id="flyer" hidden></div>
+        <button class="keycap" id="keycap" type="button">
+          <span class="key">Right&nbsp;Ctrl</span>
+          <span class="key-hint"><span lang="ru">Зажми и держи</span><span lang="en">Press &amp; hold</span></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ NUMBERS ============ -->
+    <section class="numbers" aria-label="Facts">
+      <div><b>0</b><span lang="ru">байт голоса в облако</span><span lang="en">bytes of audio to the cloud</span></div>
+      <div><b>20</b><span lang="ru">питомцев-тамагочи</span><span lang="en">tamagotchi pets</span></div>
+      <div><b>15</b><span lang="ru">анимированных состояний</span><span lang="en">animated states</span></div>
+      <div><b>91</b><span lang="ru">автотест</span><span lang="en">automated tests</span></div>
+      <div><b>2</b><span lang="ru">платформы, 1 пайплайн</span><span lang="en">platforms, 1 pipeline</span></div>
+    </section>
+
+    <div class="with-aside">
+      <div class="content">
+        <!-- ============ FEATURES ============ -->
+        <section id="features" class="block">
+          <p class="kicker"><span lang="ru">Возможности</span><span lang="en">Features</span></p>
+          <h2><span lang="ru">Диктовка, которая не мешает, а радует</span><span lang="en">Dictation that stays out of your way — and makes you smile</span></h2>
+          <div class="grid cards">
+            <article class="card">
+              <div class="ico">🎙️</div>
+              <h3><span lang="ru">Push-to-talk</span><span lang="en">Push-to-talk</span></h3>
+              <p><span lang="ru">Держи <kbd>Right Ctrl</kbd> (на Mac — правый <kbd>Option</kbd>), говори, отпусти. Текст вставляется в любое приложение.</span><span lang="en">Hold <kbd>Right Ctrl</kbd> (Right <kbd>Option</kbd> on a Mac), speak, release. Text goes into any app.</span></p>
+            </article>
+            <article class="card">
+              <div class="ico">🙌</div>
+              <h3><span lang="ru">Без рук</span><span lang="en">Hands-free</span></h3>
+              <p><span lang="ru">Двойное нажатие — и можно диктовать хоть 10 минут. <kbd>Esc</kbd> отменяет.</span><span lang="en">Double-tap and dictate for up to 10 minutes. <kbd>Esc</kbd> cancels.</span></p>
+            </article>
+            <article class="card">
+              <div class="ico">🔒</div>
+              <h3><span lang="ru">Полностью локально</span><span lang="en">Fully local</span></h3>
+              <p><span lang="ru">Движок whisper.cpp и модель уже внутри установщика. Работает без интернета, ничего не отправляет.</span><span lang="en">The whisper.cpp engine and model ship inside the installer. Works offline, sends nothing.</span></p>
+            </article>
+            <article class="card">
+              <div class="ico">📖</div>
+              <h3><span lang="ru">Словарь и автозамены</span><span lang="en">Dictionary &amp; replacements</span></h3>
+              <p><span lang="ru">Свои термины и имена, «новая строка», «новый абзац», замены фраз на текст.</span><span lang="en">Your own terms and names, “new line”, “new paragraph”, phrase-to-text replacements.</span></p>
+            </article>
+            <article class="card">
+              <div class="ico">🍅</div>
+              <h3><span lang="ru">Помидор по клику</span><span lang="en">Pomodoro on click</span></h3>
+              <p><span lang="ru">Кликни по питомцу — циферблат: 25-5, 50-10 или свои минуты. Часики над головой.</span><span lang="en">Click the pet for a dial: 25-5, 50-10 or your own. A tiny clock floats over its head.</span></p>
+            </article>
+            <article class="card">
+              <div class="ico">👑</div>
+              <h3><span lang="ru">Уровни и сытость</span><span lang="en">Levels &amp; hunger</span></h3>
+              <p><span lang="ru">Каждое слово кормит питомца. От «Малыша» до «Легенды» — бабочка, очки, шапочка, корона.</span><span lang="en">Every word feeds your pet. From “Baby” to “Legend” — bow tie, glasses, cap, crown.</span></p>
+            </article>
+            <article class="card">
+              <div class="ico">🕘</div>
+              <h3><span lang="ru">История</span><span lang="en">History</span></h3>
+              <p><span lang="ru">Поиск, копирование, прослушать запись, распознать заново другой моделью. Или режим приватности.</span><span lang="en">Search, copy, replay audio, re-transcribe with another model. Or turn on privacy mode.</span></p>
+            </article>
+            <article class="card">
+              <div class="ico">🤸</div>
+              <h3><span lang="ru">Живой, с физикой</span><span lang="en">Alive, with physics</span></h3>
+              <p><span lang="ru">Хватай и бросай — он раскачивается, отскакивает от краёв, падает на панель задач. Спит, шалит, просит есть.</span><span lang="en">Grab and toss it — it swings, bounces off edges, lands on the taskbar. Sleeps, plays pranks, asks for food.</span></p>
+            </article>
+          </div>
+        </section>
+
+        <!-- ============ PETS ============ -->
+        <section id="pets" class="block">
+          <p class="kicker"><span lang="ru">Питомцы</span><span lang="en">Pets</span></p>
+          <h2><span lang="ru">Выбери, кто будет записывать за тобой</span><span lang="en">Pick who takes notes for you</span></h2>
+          <p class="sub"><span lang="ru">Все 20 нарисованы с нуля векторами — на сайте те же самые, что в приложении. Нажми на состояние или на питомца.</span><span lang="en">All 20 are hand-built vector art — the very same ones the app ships. Tap a state or a pet.</span></p>
+          <div class="states" id="states" role="tablist"></div>
+          <div class="gallery" id="gallery"></div>
+
+          <div class="levels">
+            <h3><span lang="ru">Растёт вместе с тобой</span><span lang="en">Grows with you</span></h3>
+            <div class="level-row" id="levels"></div>
+          </div>
+        </section>
+
+        <!-- ============ HOW ============ -->
+        <section id="how" class="block">
+          <p class="kicker"><span lang="ru">Под капотом</span><span lang="en">Under the hood</span></p>
+          <h2><span lang="ru">Путь фразы: от голоса до текста за пару секунд</span><span lang="en">A phrase’s journey: voice to text in a couple of seconds</span></h2>
+          <figure class="diagram">
+            <svg viewBox="0 0 940 300" role="img" aria-labelledby="d1t" class="flow">
+              <title id="d1t">Dictation pipeline</title>
+              <defs>
+                <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" class="arrow-head"/></marker>
+              </defs>
+              <g class="lane">
+                <rect x="10" y="20" width="920" height="150" rx="18" class="lane-bg"/>
+                <text x="28" y="44" class="lane-t"><tspan lang="ru">твой компьютер · 127.0.0.1</tspan><tspan lang="en">your computer · 127.0.0.1</tspan></text>
+              </g>
+              <g class="node n1"><rect x="30" y="66" width="120" height="78" rx="14"/><text x="90" y="98">⌨️ Hotkey</text><text x="90" y="120" class="mono">uiohook</text></g>
+              <g class="node n2"><rect x="180" y="66" width="130" height="78" rx="14"/><text x="245" y="98">🎙️ Mic</text><text x="245" y="120" class="mono">AudioWorklet 16k</text></g>
+              <g class="node n3"><rect x="340" y="66" width="130" height="78" rx="14"/><text x="405" y="98">✂️ VAD</text><text x="405" y="120" class="mono">squeeze silence</text></g>
+              <g class="node n4 hot"><rect x="500" y="56" width="150" height="98" rx="16"/><text x="575" y="92">🧠 whisper.cpp</text><text x="575" y="114" class="mono">Metal · OpenBLAS</text><text x="575" y="134" class="mono">ggml small-q5</text></g>
+              <g class="node n5"><rect x="680" y="66" width="110" height="78" rx="14"/><text x="735" y="98">🪄 Text</text><text x="735" y="120" class="mono">rules · dict</text></g>
+              <g class="node n6"><rect x="820" y="66" width="100" height="78" rx="14"/><text x="870" y="98">📋 Paste</text><text x="870" y="120" class="mono">Ctrl/⌘+V</text></g>
+              <g class="links">
+                <path d="M150 105H178" marker-end="url(#arr)"/><path d="M310 105H338" marker-end="url(#arr)"/><path d="M470 105H498" marker-end="url(#arr)"/><path d="M650 105H678" marker-end="url(#arr)"/><path d="M790 105H818" marker-end="url(#arr)"/>
+              </g>
+              <g class="pet-lane">
+                <rect x="180" y="200" width="610" height="76" rx="16" class="lane-pet"/>
+                <text x="200" y="232" class="lane-t2"><tspan lang="ru">питомец (FSM) реагирует:</tspan><tspan lang="en">the pet (FSM) reacts:</tspan></text>
+                <text x="200" y="258" class="mono2">listen → write → throw ✈ → happy · +food · +level</text>
+                <path d="M245 144V198 M575 154V198 M870 144V238H792" class="dash" marker-end="url(#arr)"/>
+              </g>
+            </svg>
+            <figcaption><span lang="ru">Звук никуда не уходит: whisper-server слушает только локальный адрес 127.0.0.1. Записка летит ровно столько, сколько идёт распознавание — время предсказывается по твоей истории.</span><span lang="en">Audio goes nowhere: whisper-server binds to 127.0.0.1 only. The note flies exactly as long as recognition takes — the duration is predicted from your own history.</span></figcaption>
+          </figure>
+
+          <h2 class="h2-2"><span lang="ru">Как мы это строим и выпускаем</span><span lang="en">How we build and ship it</span></h2>
+          <div class="two">
+            <figure class="diagram">
+              <svg viewBox="0 0 460 330" role="img" aria-labelledby="d2t" class="flow">
+                <title id="d2t">Clean-room reverse engineering</title>
+                <g class="node n1"><rect x="20" y="20" width="420" height="54" rx="14"/><text x="230" y="53"><tspan lang="ru">1 · Наблюдаем поведение «чёрного ящика»</tspan><tspan lang="en">1 · Observe the black box’s behaviour</tspan></text></g>
+                <g class="node n2"><rect x="20" y="96" width="420" height="54" rx="14"/><text x="230" y="129"><tspan lang="ru">2 · Пишем спецификацию: состояния, тайминги</tspan><tspan lang="en">2 · Write the spec: states, timings</tspan></text></g>
+                <g class="wall"><path d="M10 172H450" /><text x="230" y="167" class="wall-t">clean-room ✋</text></g>
+                <g class="node n3"><rect x="20" y="190" width="420" height="54" rx="14"/><text x="230" y="223"><tspan lang="ru">3 · Свой код и свой арт по спеке</tspan><tspan lang="en">3 · Original code &amp; art from the spec</tspan></text></g>
+                <g class="node n4 hot"><rect x="20" y="266" width="420" height="54" rx="14"/><text x="230" y="299"><tspan lang="ru">4 · Тесты: FSM, физика, хоткеи, текст</tspan><tspan lang="en">4 · Tests: FSM, physics, hotkeys, text</tspan></text></g>
+                <g class="links"><path d="M230 74V94" marker-end="url(#arr)"/><path d="M230 150V188" marker-end="url(#arr)"/><path d="M230 244V264" marker-end="url(#arr)"/></g>
+              </svg>
+              <figcaption><span lang="ru"><b>Reverse engineering без копирования.</b> Повторяем только поведение — ни строчки чужого кода, ни одного чужого пикселя.</span><span lang="en"><b>Reverse engineering without copying.</b> We reproduce behaviour only — not a line of someone else’s code, not a single borrowed pixel.</span></figcaption>
+            </figure>
+            <figure class="diagram">
+              <svg viewBox="0 0 460 330" role="img" aria-labelledby="d3t" class="flow">
+                <title id="d3t">CI/CD pipeline</title>
+                <g class="node n1"><rect x="150" y="14" width="160" height="46" rx="14"/><text x="230" y="43" class="mono">git tag v0.4.1</text></g>
+                <g class="node n2"><rect x="120" y="82" width="220" height="46" rx="14"/><text x="230" y="111">⚙️ GitHub Actions</text></g>
+                <g class="node n3"><rect x="14" y="152" width="200" height="78" rx="14"/><text x="114" y="180">🪟 windows-latest</text><text x="114" y="200" class="mono">test → NSIS + portable</text><text x="114" y="218" class="mono">whisper OpenBLAS</text></g>
+                <g class="node n5"><rect x="246" y="152" width="200" height="78" rx="14"/><text x="346" y="180">🍎 macos-14 (arm64)</text><text x="346" y="200" class="mono">build whisper + Metal</text><text x="346" y="218" class="mono">DMG + codesign</text></g>
+                <g class="node n4 hot"><rect x="60" y="256" width="160" height="58" rx="14"/><text x="140" y="282">📦 Releases</text><text x="140" y="300" class="mono">.exe · .dmg</text></g>
+                <g class="node n6"><rect x="240" y="256" width="160" height="58" rx="14"/><text x="320" y="282">🌐 Pages</text><text x="320" y="300" class="mono"><tspan lang="ru">этот сайт</tspan><tspan lang="en">this site</tspan></text></g>
+                <g class="links"><path d="M230 60V80" marker-end="url(#arr)"/><path d="M190 128 120 150" marker-end="url(#arr)"/><path d="M270 128 340 150" marker-end="url(#arr)"/><path d="M114 230 130 254" marker-end="url(#arr)"/><path d="M346 230 200 254" marker-end="url(#arr)"/><path d="M220 285H238" marker-end="url(#arr)" class="dash"/></g>
+              </svg>
+              <figcaption><span lang="ru"><b>Один тег — две платформы.</b> Тесты, сборка Windows и macOS, релиз и обновление сайта — автоматически. Кнопки «Скачать» сами берут последнюю версию.</span><span lang="en"><b>One tag, two platforms.</b> Tests, Windows and macOS builds, the release and this site update automatically. The download buttons always pick the latest version.</span></figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- ============ TEAM / HIRE ============ -->
+        <section id="team" class="block team">
+          <p class="kicker"><span lang="ru">Кто это сделал</span><span lang="en">Who made this</span></p>
+          <h2><span lang="ru">Андрей + Claude: два разработчика, один из них — ИИ</span><span lang="en">Andrii + Claude: two developers, one of them is an AI</span></h2>
+          <div class="duo">
+            <div class="person">
+              <div class="avatar a1" aria-hidden="true">А</div>
+              <div>
+                <h3><span lang="ru">Андрей Павловский</span><span lang="en">Andrii Pavlovskyi</span></h3>
+                <p><span lang="ru">Идея, продукт, архитектура, тестирование на живых машинах. Ставит задачу и отвечает за результат перед заказчиком.</span><span lang="en">Idea, product, architecture, real-hardware testing. Owns the task and answers to the client for the result.</span></p>
+              </div>
+            </div>
+            <div class="person">
+              <div class="avatar a2" aria-hidden="true">✳</div>
+              <div>
+                <h3>Claude <small>(Anthropic)</small></h3>
+                <p><span lang="ru">AI-напарник: код, тесты, ресёрч, CI/CD, документация. Пишет быстро, а Андрей проверяет каждую версию.</span><span lang="en">AI pair programmer: code, tests, research, CI/CD, docs. Writes fast — and Andrii checks every release.</span></p>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="h3-svc"><span lang="ru">Что можем сделать для тебя</span><span lang="en">What we can build for you</span></h3>
+          <div class="grid services">
+            <div class="svc"><b><span lang="ru">Десктоп-приложения</span><span lang="en">Desktop apps</span></b><span lang="ru">Windows и macOS на Electron: трей, хоткеи, оверлеи, установщики.</span><span lang="en">Windows &amp; macOS with Electron: tray, hotkeys, overlays, installers.</span></div>
+            <div class="svc"><b><span lang="ru">Голос и локальный ИИ</span><span lang="en">Voice &amp; local AI</span></b><span lang="ru">Распознавание речи, LLM-интеграции, приватные офлайн-решения.</span><span lang="en">Speech recognition, LLM integrations, private offline solutions.</span></div>
+            <div class="svc"><b><span lang="ru">Reverse engineering</span><span lang="en">Reverse engineering</span></b><span lang="ru">Разбор поведения программ и протоколов, чистые спецификации.</span><span lang="en">Behaviour and protocol analysis, clean specifications.</span></div>
+            <div class="svc"><b><span lang="ru">Автоматизация и боты</span><span lang="en">Automation &amp; bots</span></b><span lang="ru">Скрипты, Telegram-боты, парсеры, интеграции API.</span><span lang="en">Scripts, Telegram bots, scrapers, API integrations.</span></div>
+            <div class="svc"><b>CI/CD &amp; DevOps</b><span lang="ru">GitHub Actions, сборки под разные ОС, релизы, деплой.</span><span lang="en">GitHub Actions, multi-OS builds, releases, deployment.</span></div>
+            <div class="svc"><b><span lang="ru">Сайты-лендинги</span><span lang="en">Landing pages</span></b><span lang="ru">Вот такие — быстрые, без лишних библиотек, с бесплатным хостингом.</span><span lang="en">Like this one — fast, dependency-free, on free hosting.</span></div>
+          </div>
+
+          <ol class="process">
+            <li><b><span lang="ru">Напиши</span><span lang="en">Message us</span></b><span lang="ru">Пара фраз о задаче — хватит.</span><span lang="en">A couple of sentences is enough.</span></li>
+            <li><b><span lang="ru">Спека</span><span lang="en">Spec</span></b><span lang="ru">За 1–2 дня — план, сроки, цена.</span><span lang="en">In 1–2 days: plan, timeline, price.</span></li>
+            <li><b><span lang="ru">Итерации</span><span lang="en">Iterations</span></b><span lang="ru">Рабочие сборки каждую неделю.</span><span lang="en">Working builds every week.</span></li>
+            <li><b><span lang="ru">Релиз</span><span lang="en">Release</span></b><span lang="ru">Установщики, пайплайн, поддержка.</span><span lang="en">Installers, pipeline, support.</span></li>
+          </ol>
+
+          <div class="contact" id="contact">
+            <div>
+              <h3><span lang="ru">Есть задача? Обсудим.</span><span lang="en">Got a project? Let’s talk.</span></h3>
+              <p><span lang="ru">Отвечаем на русском, украинском и английском.</span><span lang="en">We answer in English, Ukrainian and Russian.</span></p>
+            </div>
+            <div class="contact-links">
+              <a class="btn btn-primary" href="https://t.me/+380934948881" target="_blank" rel="noopener">✈️ Telegram</a>
+              <a class="btn btn-ghost" href="mailto:pavlovskyiandrii@gmail.com?subject=Diktovshchik%20Pet%20%E2%80%94%20project">✉️ pavlovskyiandrii@gmail.com</a>
+              <a class="btn btn-ghost" href="tel:+380934948881">📞 +380 93 494 88 81</a>
+              <a class="btn btn-ghost" href="https://github.com/Pavlovskyi-Andrii" target="_blank" rel="noopener">🐙 GitHub</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ FAQ ============ -->
+        <section id="faq" class="block">
+          <p class="kicker">FAQ</p>
+          <h2><span lang="ru">Частые вопросы</span><span lang="en">Questions</span></h2>
+          <details>
+            <summary><span lang="ru">Это правда бесплатно?</span><span lang="en">Is it really free?</span></summary>
+            <p><span lang="ru">Да. Ни подписки, ни аккаунта, ни рекламы. Распознавание работает на твоём железе, поэтому нам не за что брать деньги каждый месяц.</span><span lang="en">Yes. No subscription, no account, no ads. Recognition runs on your hardware, so there’s nothing to charge monthly for.</span></p>
+          </details>
+          <details>
+            <summary><span lang="ru">Мой голос куда-то отправляется?</span><span lang="en">Is my voice sent anywhere?</span></summary>
+            <p><span lang="ru">Нет. Звук записывается в память, распознаётся локальным whisper.cpp на адресе 127.0.0.1 и (если хочешь) хранится в истории на твоём диске. Есть режим приватности — тогда не сохраняется ничего.</span><span lang="en">No. Audio is captured in memory, recognized by a local whisper.cpp on 127.0.0.1 and (if you want) kept in history on your own disk. Privacy mode keeps nothing at all.</span></p>
+          </details>
+          <details>
+            <summary><span lang="ru">Windows пишет «Система Windows защитила ваш компьютер»</span><span lang="en">Windows says “Windows protected your PC”</span></summary>
+            <p><span lang="ru">Установщик пока без платной цифровой подписи. Нажми «Подробнее» → «Выполнить в любом случае». Установка в профиль пользователя, права администратора не нужны.</span><span lang="en">The installer isn’t code-signed yet. Click “More info” → “Run anyway”. It installs per-user, no admin rights needed.</span></p>
+          </details>
+          <details>
+            <summary><span lang="ru">macOS не открывает приложение</span><span lang="en">macOS won’t open the app</span></summary>
+            <p><span lang="ru">Перетащи приложение в «Программы» и попробуй открыть. Затем: Системные настройки → Конфиденциальность и безопасность → внизу «Открыть всё равно». После запуска разреши <b>Микрофон</b> и <b>Универсальный доступ</b> — без него не работают хоткеи и вставка ⌘V. Нужен Mac на Apple Silicon (M1 и новее) и macOS 12+.</span><span lang="en">Drag the app to Applications and try to open it. Then: System Settings → Privacy &amp; Security → “Open Anyway” at the bottom. After launch, allow <b>Microphone</b> and <b>Accessibility</b> — hotkeys and ⌘V pasting need it. Requires an Apple Silicon Mac (M1+) and macOS 12+.</span></p>
+          </details>
+          <details>
+            <summary><span lang="ru">Какие требования к компьютеру?</span><span lang="en">System requirements?</span></summary>
+            <p><span lang="ru">Windows 10/11 x64 или macOS 12+ на Apple Silicon, ~600 МБ на диске, 4+ ядра. Модель по умолчанию — whisper small (190 МБ); в настройках можно скачать быструю base или точную large-v3-turbo.</span><span lang="en">Windows 10/11 x64 or macOS 12+ on Apple Silicon, ~600 MB of disk, 4+ cores. The default model is whisper small (190 MB); grab the faster base or the more accurate large-v3-turbo in settings.</span></p>
+          </details>
+          <details>
+            <summary><span lang="ru">Какие языки понимает?</span><span lang="en">Which languages?</span></summary>
+            <p><span lang="ru">Все 99 языков Whisper: русский, украинский, английский и другие. Можно автоопределение или зафиксировать язык — так вдвое быстрее.</span><span lang="en">All 99 Whisper languages, including English, Ukrainian and Russian. Auto-detect, or pin a language for ~2× speed.</span></p>
+          </details>
+        </section>
+      </div>
+
+      <!-- ============ STACK ASIDE ============ -->
+      <aside class="aside" aria-label="Tech stack">
+        <div class="aside-in">
+          <p class="kicker"><span lang="ru">Технологии</span><span lang="en">Tech stack</span></p>
+          <div class="stack">
+            <h4><span lang="ru">Исследование</span><span lang="en">Research</span></h4>
+            <ul><li>Reverse engineering</li><li>Clean-room spec</li><li>State machines</li><li><span lang="ru">Тайминги анимаций</span><span lang="en">Animation timing</span></li></ul>
+            <h4><span lang="ru">Десктоп</span><span lang="en">Desktop</span></h4>
+            <ul><li>Electron 28</li><li>Node.js (ESM)</li><li>Win32 FFI · koffi</li><li>uiohook (global hooks)</li><li>macOS TCC · Accessibility</li></ul>
+            <h4><span lang="ru">Голос и ИИ</span><span lang="en">Voice &amp; AI</span></h4>
+            <ul><li>whisper.cpp · GGML</li><li>Metal · OpenBLAS</li><li>AudioWorklet 16 kHz</li><li><span lang="ru">VAD, сжатие пауз</span><span lang="en">VAD, silence squeeze</span></li><li><span lang="ru">Прогноз ETA</span><span lang="en">ETA prediction</span></li></ul>
+            <h4><span lang="ru">Графика</span><span lang="en">Graphics</span></h4>
+            <ul><li><span lang="ru">Векторный SVG-арт</span><span lang="en">Vector SVG art</span></li><li>CSS animation</li><li>Canvas</li><li><span lang="ru">Физика 2D</span><span lang="en">2D physics</span></li></ul>
+            <h4><span lang="ru">Качество</span><span lang="en">Quality</span></h4>
+            <ul><li>node:test · 91</li><li><span lang="ru">Чистое ядро без Electron</span><span lang="en">Pure, Electron-free core</span></li></ul>
+            <h4>DevOps</h4>
+            <ul><li>GitHub Actions</li><li>electron-builder</li><li>NSIS · DMG · codesign</li><li>GitHub Releases · Pages</li></ul>
+          </div>
+          <a class="btn btn-primary btn-block" href="#contact"><span lang="ru">Заказать проект</span><span lang="en">Start a project</span></a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <div class="foot-pets" id="foot-pets" aria-hidden="true"></div>
+    <p>
+      © 2026 Andrii Pavlovskyi &amp; Claude ·
+      <span lang="ru">Оригинальный арт и код. Распознавание речи —</span><span lang="en">Original art and code. Speech recognition by</span>
+      <a href="https://github.com/ggml-org/whisper.cpp" target="_blank" rel="noopener">whisper.cpp</a> (MIT).
+    </p>
+  </footer>
+</body>
+</html>
