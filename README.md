@@ -1,4 +1,4 @@
-# Diktovshchik Pet
+# DiktoPet
 
 Free, fully local voice dictation for Windows and macOS — with a desktop pet that takes notes.
 
@@ -6,3 +6,5 @@ Free, fully local voice dictation for Windows and macOS — with a desktop pet t
 - Downloads: [Releases](https://github.com/Pavlovskyi-Andrii/dikto-pet/releases/latest)
 
 Made by Andrii Pavlovskyi & Claude. Speech recognition by [whisper.cpp](https://github.com/ggml-org/whisper.cpp) (MIT).
+
+*Formerly “Diktovshchik Pet”. Installer file names still use the old name for now.*
